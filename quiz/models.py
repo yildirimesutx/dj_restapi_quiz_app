@@ -20,7 +20,7 @@ class Quiz(models.Model):
        
 
 class Question(models.Model):
-    quiz = models.ForeignKey(Quiz, related_name='question', on_delete=models.CASCADE)
+    # quiz = models.ForeignKey(Quiz, related_name='question', on_delete=models.CASCADE)
     title = models.CharField(max_length=20)
     DIFFICULTY = (
        ('H', 'High'),
