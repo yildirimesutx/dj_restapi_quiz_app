@@ -11,15 +11,7 @@ class CategoryView(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
-    @action(methods=["GET"], detail=False)
-    def quiz_count(self, request):
-        quiz_count = Quiz.objects.all().count()
-
-        count = {
-            'quiz_count': quiz_count
-        }
-
-        return Response(count)
+   
 
 
 

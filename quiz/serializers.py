@@ -21,10 +21,17 @@ class CategorySerializer(serializers.ModelSerializer):
        
 
 class QuizSerializer(serializers.ModelSerializer):
+
+    question_count = serializers.SerializerMethodField()
     class Meta :
         model = Quiz
-        fields = '__all__'
-
+        # fields = '__all__'
+        fields = [
+            "title",
+            "question_count"
+        ]
+    def get_question_count(self, obj):
+       return Question.objects.filter(question_id=obj.id).count() 
 
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta :
