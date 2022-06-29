@@ -1,9 +1,11 @@
 # QUIZ APP
 
+<img src='/erd.png'>
+
 - users app
 - quiz app
 
-* users app
+******** USERS APP *************
 
    - auth işlemleri için TokenAuthentication kullandık.
 
@@ -157,9 +159,15 @@ login olduktan sonra Token oluştu.
 ```
 
 
-# QUİZ APP
 
-<img src='/erd.png'>
+
+******** QUİZ APP *************
+
+- ERD diyagramına göre models.py dosyamızı oluşturduk,
+
+- Oluşturulan models.py dan serializers.py oluşturduk
+
+- ModelSerializer ile devam ettik, 
 
 
 
