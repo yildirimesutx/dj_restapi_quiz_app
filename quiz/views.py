@@ -16,10 +16,10 @@ class CategoryView(ListAPIView):
     serializer_class = CategorySerializer
 
 
-class QuizView(viewsets.ModelViewSet):
+class QuizView(ListAPIView):
     queryset = Quiz.objects.all()
     serializer_class = QuizSerializer   
 
     def get_queryset(self):
        category = self.kwargs['category']
-       return Category.objects.filter(quiz__category=category)
+       return Quiz.objects.filter(category__category=category)

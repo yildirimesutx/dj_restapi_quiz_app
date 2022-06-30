@@ -27,11 +27,13 @@ class QuizSerializer(serializers.ModelSerializer):
         model = Quiz
         # fields = '__all__'
         fields = [
+            "id",
+            "category",
             "title",
             "question_count"
         ]
     def get_question_count(self, obj):
-       return Question.objects.filter(question_id=obj.id).count() 
+       return Question.objects.filter(quiz_id=obj.id).count() 
 
 class QuestionSerializer(serializers.ModelSerializer):
     class Meta :
