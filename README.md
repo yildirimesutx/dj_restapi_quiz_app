@@ -200,7 +200,43 @@ nested olarak kullanımda, ilgili çağrılacak olan modelin field da
 
 related_name='  '  kullanıyoruz.
 
+```
+
+- Filtering against the URL 
+  -dinamik url oluşturacağız
 
 
+```
+bu yöntem viewssette denediğimizde olmadı
+
+class CategoryView(ListAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+
+class QuizView(ListAPIView):
+    queryset = Quiz.objects.all()
+    serializer_class = QuizSerializer 
+    permission_classes=(IsAuthOrNot,)  
+
+    def get_queryset(self):
+       category = self.kwargs['category']
+       return Quiz.objects.filter(category__name__iexact=category)
+
+```
+
+- generics APIView kullandık,
+- https://www.django-rest-framework.org/api-guide/filtering/#filtering-against-the-url
+- ilgili dökümanda belirtildiği gibi get_queryset ile override ettik,
+- url de aranması gereken field kwargs içinde tanımladık ve değişkene atadık,
+- ilk önce "/quiz" ile category leri sorguladık, ilgili categoryler içinden seçim yapabilmesi için Category modelinden category field aldık,
+- url de catergory "backend" olan quizleri sorgulamak için Quiz modelini filter methoduna tabi tuttuk,
+- filter içindeki category field i Quiz modeldeki ForeignKey ile tanımlanan, bu field içinde Catergory modelindeki nameleri çektik ve yapılan sorgulama ile eşitledik.
+
+
+```
+path('quiz/<str:category>', QuizView.as_view()),
+
+urls.py da bu şekilde karşıladık
 ```
 
