@@ -22,4 +22,8 @@ class QuizView(ListAPIView):
 
     def get_queryset(self):
        category = self.kwargs['category']
-       return Quiz.objects.filter(category__category=category)
+       return Quiz.objects.filter(category__name=category)
+    # def get(self):
+    #     category = Quiz.objects.filter(category__name=kwargs['category'])
+    #     serializer = QuizSerializer(category, many=True)
+    #     return Response(serializer.data)

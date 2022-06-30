@@ -10,8 +10,8 @@ from .views import CategoryView, QuizView
 urlpatterns = [
     # path('', include(router.urls))
     path('quiz/', CategoryView.as_view()),
-    path('^quiz/(?P<category>.+)/$', QuizView.as_view()),
-    # path('quiz/<str:category>', QuizView.as_view()),
+    # path('^quiz/(<category>.+)/$', QuizView.as_view()),
+    path('quiz/<str:category>', QuizView.as_view()),
     # path('category/', QuizView.as_view()),
 ]
 
