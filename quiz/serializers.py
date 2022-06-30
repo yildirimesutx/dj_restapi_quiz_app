@@ -35,14 +35,37 @@ class QuizSerializer(serializers.ModelSerializer):
     def get_question_count(self, obj):
        return Question.objects.filter(quiz_id=obj.id).count() 
 
-class QuestionSerializer(serializers.ModelSerializer):
-    class Meta :
-        model = Question
-        fields = '__all__'
 
 
 class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answer
-        fields = fields = '__all__'
+        # fields = fields = '__all__'
+        fields = [
+            "answer_text",
+            "is_right",
+           
+        ]
+
+
+
+
+class QuestionSerializer(serializers.ModelSerializer):
+
+    answers = AnswerSerializer(many=True, read_only=True)
+    # answer_id = serializers.IntegerField(read_only=True, required=False)
+    # answer = serializers.StringRelatedField() 
+
+    class Meta :
+        model = Question
+        # fields = '__all__'
+        fields = [
+            "title",
+            # "answer_text",
+            "answers",
+            "difficulty"
+        ]
+
+
+
 

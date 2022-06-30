@@ -23,11 +23,11 @@ class Question(models.Model):
     title = models.CharField(max_length=20)
     quiz =  models.ForeignKey(Quiz, on_delete=models.CASCADE)
     DIFFICULTY = (
-       ('H', 'High'),
-       ('M', 'Medium'),
-       ('L', 'Low'),
+       ('High', 'High'),
+       ('Medium', 'Medium'),
+       ('Low', 'Low'),
     )
-    difficulty = models.CharField(max_length=5, choices=DIFFICULTY, default='L')
+    difficulty = models.CharField(max_length=10, choices=DIFFICULTY, default='Low')
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     updated = models.DateTimeField(auto_now=True, null=True)
 
@@ -37,7 +37,7 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE,related_name='answers')
     answer_text = models.CharField(max_length=30)
     is_right = models.BooleanField(default=False)
     updated = models.DateTimeField(auto_now=True, null=True)  

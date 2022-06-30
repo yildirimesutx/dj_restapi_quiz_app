@@ -4,12 +4,10 @@ from .serializers import CategorySerializer, QuizSerializer, QuestionSerializer,
 from rest_framework.decorators import action
 from rest_framework import  viewsets
 from rest_framework.response import Response
-from .permissions import IsAuthOrNot
+from .permission import IsAuthOrNot
 from rest_framework.generics import ListAPIView
 
-# class CategoryView(viewsets.ModelViewSet):
-#     queryset = Category.objects.all()
-#     serializer_class = CategorySerializer
+
 
 class CategoryView(ListAPIView):
     queryset = Category.objects.all()
@@ -18,12 +16,21 @@ class CategoryView(ListAPIView):
 
 class QuizView(ListAPIView):
     queryset = Quiz.objects.all()
-    serializer_class = QuizSerializer   
+    serializer_class = QuizSerializer 
+    permission_classes=(IsAuthOrNot,)  
 
     def get_queryset(self):
        category = self.kwargs['category']
-       return Quiz.objects.filter(category__name=category)
-    # def get(self):
-    #     category = Quiz.objects.filter(category__name=kwargs['category'])
-    #     serializer = QuizSerializer(category, many=True)
-    #     return Response(serializer.data)
+       return Quiz.objects.filter(category__name__iexact=category)
+  
+
+
+class QuestionSerializer(ListAPIView):
+    queryset = Question.objects.all()
+    serializer_class = QuestionSerializer
+    permission_classes=(IsAuthOrNot,)   
+
+    def get_queryset(self):
+       title = self.kwargs['title']
+       return Question.objects.filter(quiz__title__iexact=title)
+
