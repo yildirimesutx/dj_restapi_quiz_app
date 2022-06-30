@@ -53,15 +53,13 @@ class AnswerSerializer(serializers.ModelSerializer):
 class QuestionSerializer(serializers.ModelSerializer):
 
     answers = AnswerSerializer(many=True, read_only=True)
-    # answer_id = serializers.IntegerField(read_only=True, required=False)
-    # answer = serializers.StringRelatedField() 
+
 
     class Meta :
         model = Question
         # fields = '__all__'
         fields = [
             "title",
-            # "answer_text",
             "answers",
             "difficulty"
         ]

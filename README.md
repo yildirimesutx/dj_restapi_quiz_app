@@ -170,4 +170,37 @@ login olduktan sonra Token oluştu.
 - ModelSerializer ile devam ettik, 
 
 
+```
+
+SerializerMethodField() bu method ile gelen objenin görüntülenmesinde değişiklik yapabiliyoruz.
+filter ile toplam gelen veriyi tespit ettik
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    
+    quiz_count= serializers.SerializerMethodField()
+  
+    class Meta :
+        model = Category
+        # fields = '__all__'
+        fields = [
+           'id',
+           'name',
+           'quiz_count' 
+        ]
+    def get_quiz_count(self, obj):
+       return Quiz.objects.filter(category_id=obj.id).count() 
+
+
+
+```
+
+```
+nested olarak kullanımda, ilgili çağrılacak olan modelin field da  
+
+related_name='  '  kullanıyoruz.
+
+
+
+```
 
