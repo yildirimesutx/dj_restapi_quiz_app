@@ -45,7 +45,9 @@ INSTALLED_APPS = [
     #third party app
     'rest_framework.authtoken',
     'rest_framework',
-    'nested_admin', 
+    'nested_admin',
+    'drf_yasg',
+    "debug_toolbar" 
 
 
 ]
@@ -53,6 +55,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -134,3 +137,10 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = { 'DEFAULT_AUTHENTICATION_CLASSES': [ 'rest_framework.authentication.TokenAuthentication' ] }
+
+
+INTERNAL_IPS = [
+    
+"127.0.0.1",
+
+]
